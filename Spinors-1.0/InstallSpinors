@@ -1,0 +1,321 @@
+#!/bin/bash
+Spinorsfiles="Spinors.m spinors_impl.m SamPalette.nb README SpinorsVersion"
+possibleinstallationpath="$HOME/Spinors/ $PWD Other"
+
+function find_platform() {
+platforms="mac linux"
+
+case $HOSTTYPE in 
+*linux* ) platform=linux; initmdir=$HOME/.Mathematica/Autoload
+ ;;
+powerpc|intel_pc|*mac*|powerpc) platform=mac; initmdir=$HOME/Library/Mathematica/Autoload ;;
+*) echo "Could not determine the type of platform, please choose the most appropriate:";
+select platform in ${platforms};
+do
+    if  [ -z $platform ] ; then
+    	echo "Please choose a number between 1 and 2"
+    fi
+    break
+done ;
+case $platform in 
+linux) initmdir=$HOME/.Mathematica/Autoload ;;
+mac) initmdir=$HOME/Library/Mathematica/Autoload ;;
+esac
+;;
+esac
+echo "Platform: "$platform
+}
+
+function find_install_path() {
+
+echo "Please select the name of the directory where"
+echo "the package should be installed."
+echo 
+select installationpath in ${possibleinstallationpath};
+do
+    if ! [ -z $installationpath ] ; then
+        if [ $installationpath == Other ]; then
+        	echo "Please give the full path of the directory to install the package:"
+        	read useripath
+        	echo
+		ipath=$useripath   		
+    	else
+    	    ipath=$installationpath;
+    	fi
+    	break;
+    else 
+    	echo "Please choose a number between 1 and 3}"
+    fi
+done
+echo "installing package in $ipath ..."
+
+SpinorsPath=$ipath
+
+if ! [ -d $SpinorsPath ]; then
+    mkdir -p $SpinorsPath || { echo "Could not create directory, please try again..." ; find_install_path; };
+fi
+
+
+}
+
+function find_old_version() {
+
+
+OldSpinorsPath=`grep "SpinorsPath =" $initm | grep -o "\".*\""| grep -o "[^\"].*[^\"]"`
+#thisversion=`sed -n "/S@M/s/ version \([0-9].[0-9]\)/\1/;p" SpinorsVersion`
+thisversion=`grep -o "[0-9].[0.9].*"  SpinorsVersion`
+
+if [ -e $OldSpinorsPath/SpinorsVersion ] ; then
+thatversion=`grep -o "[0-9].[0.9].*" $OldSpinorsPath/SpinorsVersion`
+else thatversion="0.0"
+fi
+
+if [ "$thatversion" == "$thisversion" ]; then
+    echo "Version  $thatversion is already installed in 
+    	$OldSpinorsPath, 
+do you want to reinstall it somewhere else or overwrite it ?"
+    choices="reinstall overwrite abort"
+    select choice in ${choices};
+    do 
+    case $choice in
+    	reinstall)  use_old_path="false";    break ;;
+    	overwrite) use_old_path="true"; SpinorsPath=$OldSpinorsPath;   break ;;
+    	abort) exit 0 ;;
+    	*) echo "Please enter either 1,2 or 3"
+    esac
+    done
+
+else 
+echo "There is already a version of S@M installed (version $thatversion), the version this script installs is $thisversion. 
+Do you want to replace 
+     version $thatversion 
+with 
+     version $thisversion?"
+choices="replace  abort"
+select choice in ${choices};
+do 
+case $choice in
+    replace)     break ;;
+    abort) exit 0 ;;
+    *) echo "Please enter either 1 or 2"
+esac
+done
+fi
+}
+
+function copy_files() {
+if [ $SpinorsPath != $PWD ] ; then 
+    [ -e $SpinorsPath/Spinors.m ] && {
+    	echo -n "Deleting old version........................"
+    	rm $SpinorsPath/Spinors.m
+    	echo  "Done"
+    	}
+    echo -n "Copying the package S@M.................."
+    cp -f $Spinorsfiles $SpinorsPath
+   echo  "Done"
+
+    if ! [ -d $initmdir/Spinors ]; then mkdir $initmdir/Spinors ; fi
+    if ! [ -d $initmdir/Spinors/FrontEnd ]; then mkdir $initmdir/Spinors/FrontEnd ; fi
+    if ! [ -d  $initmdir/Spinors/FrontEnd/Palettes ]; then mkdir $initmdir/Spinors/FrontEnd/Palettes ; fi
+    ln -sf $SpinorsPath/SamPalette.nb $initmdir/Spinors/FrontEnd/Palettes/Sam.nb
+
+fi
+}
+
+function find_math {
+
+echo "Locating mathematica executable ..."
+
+which MathKernel >& /dev/null && { 
+    MATH=`which MathKernel`
+    } || { 
+    which math >& /dev/null && { 
+    	MATH=`which math`
+    }
+}
+
+if [ -z $MATH ] ; then 
+    echo "not found, trying harder... " 
+    all=`locate MathKernel | grep '/MathKernel$'`
+    allex=""
+    for file in $all ; do
+    	if [ -x $file ] ; then 
+    	    allex="$allex $file"; 
+    	fi
+    done
+    echo
+    echo "The following executables have been found, please choose the one that should be used to check the installation. If you don't want to check the installation, choose \"none\", if you want to provide another executable, choose \"other\" 
+"
+    choices="$allex other none"
+    MATH=""
+    while [ -z $MATH ] ; do
+    	select choice in ${choices};
+    	do 
+    	    case $choice in
+    	    	none) MATH="none";return 1 ; break ;;
+    	    	other) read MATH ;break ;;
+    	    	*) MATH=$choice; break ;;
+    	    esac
+    	done
+    	if ! [[ -x $MATH ]] ; then
+    	    echo "The executable could not be found, please try again."
+    	    MATH=""
+    	fi
+    done
+fi
+echo "using 
+$MATH 
+as path for the mathematica executable."
+}
+
+function install_init_m() {
+echo "(* begin of the lines added by S@M *)">install.m
+echo "\$SpinorsPath = \"$SpinorsPath\"" >> install.m
+echo "If[Not[MemberQ[\$Path,\$SpinorsPath]],\$Path = Flatten[{\$Path, \$SpinorsPath }]];">>install.m
+echo "(* end of the lines added by S@M *)">>install.m
+
+grep "Spinors" $initm >& /dev/null && { 
+    echo "Found S@M lines in initialisation file, replacing with new........."
+    sed "/begin of the lines added by S@M/,/end of the lines added by S@M/d" $initm >Spinors.init.m.temp
+    cp Spinors.init.m.temp $initm; rm Spinors.init.m.temp;echo "Done" 
+}  
+cat install.m >> $initm;
+}
+
+function find_math {
+
+echo "Locating mathematica executable ..."
+
+which MathKernel >& /dev/null && { 
+    MATH=`which MathKernel`
+    } || { 
+    which math >& /dev/null && { 
+    	MATH=`which math`
+    }
+}
+
+if [ -z $MATH ] ; then 
+    echo "not found, trying harder... " 
+    all=`locate MathKernel | grep '/MathKernel$'`
+    allex=""
+    for file in $all ; do
+    	if [ -x $file ] ; then 
+    	    allex="$allex $file"; 
+    	fi
+    done
+    echo
+    echo "The following executables have been found, please choose the one that should be used to check the installation. If you don't want to check the installation, choose \"none\", if you want to provide another executable, choose \"other\" 
+"
+    choices="$allex other none"
+    while [ -z $MATH ] ; do
+    	select choice in ${choices};
+    	do 
+    	    case $choice in
+    	    	none) MATH="none";return 1 ; break ;;
+    	    	other) read MATH ;break ;;
+    	    	*) MATH=$choice; break ;;
+    	    esac
+    	done
+    	if ! [[ -x $MATH ]] ; then
+    	    echo "The executable could not be found, please try again."
+    	    MATH=""
+    	fi
+    done
+fi
+echo "using 
+$MATH 
+as path for the mathematica executable."
+}
+
+function check_install(){
+    MATH=""
+    find_math && {
+
+    $MATH -run "Quit[]" < nolicense >& /dev/null || {
+    	failure=math
+	return 1
+    }	
+    $MATH < InstallTest.m >& /dev/null && {
+    	echo "Installation successful!"
+    	echo 
+    	echo The package can now be called with:
+    	echo
+    	echo  "    \" <<Spinors\` \" "
+    	echo
+    	return 0
+    }
+    failure=initm
+    return 1
+}
+}
+
+function kernel_trick() {
+    Kinitm=$initmdir/../Kernel/init.m
+    echo "Get[ToFileName[\"$initmdir\",\"init.m\"]]" >> $Kinitm; 
+}
+
+echo
+echo 
+echo "*********************************************"
+echo This installs the S@M Mathematica Package...
+echo "*********************************************"
+echo
+
+find_platform
+initm=$initmdir/init.m
+MATH=""
+find_math
+if [ -z $MATH ] || [ $MATH == "none" ]; then
+    echo "The MathKernel executable could not be found, this script will be unable to check the installation"
+else 
+    $MATH -run "Quit[]" < nolicense >& /dev/null || {
+    	echo "The batch version of Mathematica could not be called, please make sure that you can access the batch version of Mathematica and that you have a mathematica license."
+	echo "This script will be unable to check the installation."
+    	MATH=""
+    }	  
+fi
+if [ -z $MATH ] ; then
+    echo "Do you want to continue the installation anyway?"
+    choices="continue abort"
+    select choice in ${choices};
+    	do 
+    	    case $choice in
+    	    	abort) exit 1 ; break ;;
+    	    	continue) break ;;
+    	    	*) echo "Please enter either 1 or 2"
+    	    esac
+    	done 
+fi
+
+grep "SpinorsPath" $initm  >& /dev/null && {  find_old_version ;} ;
+
+if ! [ "$use_old_path" == "true" ] ; then find_install_path; fi
+copy_files
+
+
+echo -n "Checking installation: .... "
+install_init_m
+
+echo "Installation complete."
+if ! [ -z $MATH ] ; then
+    echo ", now checking..."
+    check_install || {
+    	kernel_trick 
+    	check_install || {
+    	    echo Installation check failed;
+	    case $failure in 
+	    math*) echo "Reason: Could not start mathematica. "  ;;
+	    initm*) echo "Reason: Mathematica could not find the package. You might have to type 
+	
+	\$SpinorsPath=$SpinorsPath
+	Get[ToFileName[{\$SpinorsPath},\"Spinors.m\"]] 
+	
+	to start the package."  ;;
+	    esac
+    	}
+    }
+fi 
+
+
+
+
