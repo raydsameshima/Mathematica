@@ -1,0 +1,314 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10358,        305]
+NotebookOptionsPosition[      9474,        273]
+NotebookOutlinePosition[      9819,        288]
+CellTagsIndexPosition[      9776,        285]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"(*", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "Given", " ", "numerator", " ", "function", " ", "\[IndentingNewLine]", 
+     "  ", "N"}], " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"k", " ", ".", " ", "p_"}], "1"}], "\[IndentingNewLine]", 
+     "    ", "=", " ", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"D_", "1"}], " ", "-", " ", 
+        RowBox[{"D_", "2"}], " ", "-", 
+        RowBox[{"p_", 
+         RowBox[{"1", "^", "2"}]}]}], ")"}], "/", "2"}]}]}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"try", " ", "to", " ", "get", " ", "c_", "0"}], " ", "=", " ", 
+    RowBox[{
+     RowBox[{"-", "p_"}], 
+     RowBox[{
+      RowBox[{"1", "^", "2"}], "/", "2."}]}]}]}], "\[IndentingNewLine]", 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.6740566130807457`*^9, 3.674056618977659*^9}, {
+  3.674056671971878*^9, 3.6740568149486275`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Import", " ", 
+     RowBox[{"Zhang", "'"}], "s", " ", "file"}], ",", " ", 
+    RowBox[{"using", " ", "relative", " ", 
+     RowBox[{"path", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"SetDirectory", "[", 
+     RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Import", "[", "\"\<BasisDet-1-02.m\>\"", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.674056816524253*^9, 3.674056887427162*^9}, {
+  3.6740569183467584`*^9, 3.674056995552148*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"D", " ", "=", " ", 
+     RowBox[{"4", " ", "-", " ", 
+      RowBox[{"2", " ", "\[Epsilon]"}]}]}], ",", " ", 
+    RowBox[{"one", " ", "loop"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Essentially", " ", "copy", " ", "and", " ", "paste", " ", "from", " ", 
+    "Zhang`s", " ", 
+    RowBox[{"code", "."}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"L", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Dim", " ", "=", " ", 
+     RowBox[{"4", " ", "-", 
+      RowBox[{"2", " ", "\[Epsilon]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"n", "=", "4"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ExternalMomentaBasis", "=", 
+     RowBox[{"{", 
+      RowBox[{"p1", ",", "p2", ",", "p4"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Kinematics", " ", "=", " ", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"p1", "^", "2"}], " ", "\[Rule]", " ", "0"}], ",", " ", 
+       RowBox[{
+        RowBox[{"p2", "^", "2"}], " ", "\[Rule]", " ", "0"}], ",", " ", 
+       RowBox[{
+        RowBox[{"p4", "^", "2"}], " ", "\[Rule]", "0"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"p1", " ", "p2"}], " ", "\[Rule]", " ", 
+        RowBox[{"s", "/", "2"}]}], ",", " ", 
+       RowBox[{
+        RowBox[{"p1", " ", "p4"}], " ", "\[Rule]", " ", 
+        RowBox[{"t", "/", "2"}]}], ",", " ", 
+       RowBox[{
+        RowBox[{"p2", " ", "p4"}], " ", "\[Rule]", " ", 
+        RowBox[{
+         RowBox[{"-", 
+          RowBox[{"(", 
+           RowBox[{"s", "+", "t"}], ")"}]}], "/", "2"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"\[Omega]", "^", "2"}], " ", "\[Rule]", " ", 
+        RowBox[{
+         RowBox[{"-", "t"}], " ", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"s", "+", "t"}], ")"}], "/", "s"}]}]}]}], 
+      "\[IndentingNewLine]", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Props", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{"l1", ",", " ", 
+       RowBox[{"l1", "-", "p1"}], ",", " ", 
+       RowBox[{"l1", "-", "p1", "-", "p2"}], ",", " ", 
+       RowBox[{"l1", "+", "p4"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"RenormalizationCondition", "=", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", "1", "}"}], ",", "4"}], "}"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"GenerateBasis", "[", "1", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"Delta4", " ", "=", " ", "Integrand"}]}]}]], "Input",
+ CellChangeTimes->{{3.674057017267627*^9, 3.674057375758556*^9}, {
+  3.674057464460725*^9, 3.6740575072985992`*^9}, {3.6740575453940434`*^9, 
+  3.6740575730530205`*^9}, {3.6740576911925783`*^9, 3.674057708945492*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Physical spacetime basis is \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"p1", ",", "p2", ",", "p4", ",", "\[Omega]1"}], "}"}]}],
+  SequenceForm[
+  "Physical spacetime basis is ", {$CellContext`p1, $CellContext`p2, \
+$CellContext`p4, $CellContext`\[Omega]1}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709787897*^9}],
+
+Cell[BoxData["\<\"Extra dimension is turned on.\"\>"], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.6740577098190975`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of irreducible scalar products: \"\>", 
+   "\[InvisibleSpace]", "2"}],
+  SequenceForm["Number of irreducible scalar products: ", 2],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709897098*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Irreducible Scalar Products:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"x14", ",", "\[Mu]11"}], "}"}]}],
+  SequenceForm[
+  "Irreducible Scalar Products:", {$CellContext`x14, $CellContext`\[Mu]11}],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709897098*^9}],
+
+Cell[BoxData["\<\"Cut equations for ISP are listed in the variable \
+'CutEqnISP'\"\>"], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709897098*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Possible renormalizable terms: \"\>", "\[InvisibleSpace]", 
+   "9"}],
+  SequenceForm["Possible renormalizable terms: ", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709928298*^9}],
+
+Cell[BoxData["\<\"\"\>"], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709928298*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The basis contains \"\>", "\[InvisibleSpace]", "5", 
+   "\[InvisibleSpace]", "\<\" terms, which are listed in the variable 'Basis'\
+\"\>"}],
+  SequenceForm[
+  "The basis contains ", 5, 
+   " terms, which are listed in the variable 'Basis'"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709928298*^9}],
+
+Cell[BoxData["\<\"The explicit form of the integrand is listed in the \
+variable 'Integrand'\"\>"], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709928298*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of spurious terms: \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\", listed in the variable 'SpuriousBasis'\"\>"}],
+  SequenceForm[
+  "Number of spurious terms: ", 2, ", listed in the variable 'SpuriousBasis'"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709928298*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of non-spurious terms: \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\", listed in the variable 'NSpuriousBasis'\"\>"}],
+  SequenceForm[
+  "Number of non-spurious terms: ", 3, 
+   ", listed in the variable 'NSpuriousBasis'"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709943898*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Time used: \"\>", "\[InvisibleSpace]", "0.15600000000000236`", 
+   "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+  SequenceForm["Time used: ", 0.15600000000000236`, " seconds"],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6740574775336084`*^9, 3.6740575091706114`*^9}, 
+   3.674057709943898*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cc", "[", 
+   RowBox[{"0", ",", "0"}], "]"}], "+", 
+  RowBox[{"\[Mu]11", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "1"}], "]"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["\[Mu]11", "2"], " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "2"}], "]"}]}], "+", 
+  RowBox[{"x14", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"1", ",", "0"}], "]"}]}], "+", 
+  RowBox[{"x14", " ", "\[Mu]11", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"1", ",", "1"}], "]"}]}]}]], "Output",
+ CellChangeTimes->{{3.67405750116776*^9, 3.6740575093422127`*^9}, 
+   3.674057709943898*^9}]
+}, Open  ]]
+},
+WindowSize->{898, 990},
+WindowMargins->{{Automatic, 71}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (September 9, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 930, 27, 132, "Input"],
+Cell[1491, 49, 594, 15, 72, "Input"],
+Cell[CellGroupData[{
+Cell[2110, 68, 2952, 78, 332, "Input"],
+Cell[CellGroupData[{
+Cell[5087, 150, 447, 10, 23, "Print"],
+Cell[5537, 162, 161, 2, 23, "Print"],
+Cell[5701, 166, 314, 7, 23, "Print"],
+Cell[6018, 175, 387, 9, 23, "Print"],
+Cell[6408, 186, 192, 3, 23, "Print"],
+Cell[6603, 191, 298, 7, 23, "Print"],
+Cell[6904, 200, 130, 2, 23, "Print"],
+Cell[7037, 204, 416, 10, 23, "Print"],
+Cell[7456, 216, 204, 3, 23, "Print"],
+Cell[7663, 221, 408, 8, 23, "Print"],
+Cell[8074, 231, 422, 9, 23, "Print"],
+Cell[8499, 242, 349, 7, 23, "Print"]
+}, Open  ]],
+Cell[8863, 252, 595, 18, 31, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
