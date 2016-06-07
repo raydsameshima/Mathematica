@@ -1,0 +1,195 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4998,        185]
+NotebookOptionsPosition[      4122,        149]
+NotebookOutlinePosition[      4469,        164]
+CellTagsIndexPosition[      4426,        161]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["define general q (integration momentum)", "Subchapter",
+ CellChangeTimes->{{3.674235874790879*^9, 3.674235887957363*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"q", "=", 
+  RowBox[{
+   RowBox[{"x1", " ", "p1"}], "+", 
+   RowBox[{"x2", " ", "p2"}], "+", 
+   RowBox[{"x3", " ", "p3"}], "+", 
+   RowBox[{"x4", " ", "ww"}]}]}]], "Input",
+ CellChangeTimes->{{3.6742357411916227`*^9, 3.6742357835146933`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p1", " ", "x1"}], "+", 
+  RowBox[{"p2", " ", "x2"}], "+", 
+  RowBox[{"p3", " ", "x3"}], "+", 
+  RowBox[{"ww", " ", "x4"}]}]], "Output",
+ CellChangeTimes->{3.674235784169898*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["define numerator function N and evaluate N(q)", "Subchapter",
+ CellChangeTimes->{{3.674235867630433*^9, 3.674235909828703*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Nq", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"x1", " ", 
+    RowBox[{"p1", "^", "2"}]}], " ", "+", " ", 
+   RowBox[{"x2", " ", 
+    RowBox[{"p1", ".", "p2"}]}], " ", "+", 
+   RowBox[{"x3", " ", 
+    RowBox[{"p1", ".", "p3", " "}]}]}]}]], "Input",
+ CellChangeTimes->{{3.67423579070634*^9, 3.674235836804635*^9}, 
+   3.6742359128083224`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SuperscriptBox["p1", "2"], " ", "x1"}], "+", 
+  RowBox[{"x2", " ", 
+   RowBox[{"p1", ".", "p2"}]}], "+", 
+  RowBox[{"x3", " ", 
+   RowBox[{"p1", ".", "p3"}]}]}]], "Output",
+ CellChangeTimes->{3.6742358376002407`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["define denominators and cut solutions", "Subchapter",
+ CellChangeTimes->{{3.674235919812767*^9, 3.6742359388916893`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DD1", "=", 
+   RowBox[{
+    RowBox[{"q", "^", "2"}], "-", "mu2"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DD2", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"q", "-", "p1"}], ")"}], "^", "2"}], "-", "mu2"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DD3", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"q", "-", "p1", "-", "p2"}], ")"}], "^", "2"}], "-", "mu2"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DD4", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"q", "+", "p4"}], ")"}], "^", "2"}], "-", "mu2"}]}], 
+  ";"}]}], "Input",
+ CellChangeTimes->{{3.674235949234556*^9, 3.67423604511277*^9}, {
+  3.6742360912110662`*^9, 3.674236101694333*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["DD1"], "Input",
+ CellChangeTimes->{{3.674236047405985*^9, 3.674236110711191*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", "mu2"}], "+", 
+  SuperscriptBox[
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"p1", " ", "x1"}], "+", 
+     RowBox[{"p2", " ", "x2"}], "+", 
+     RowBox[{"p3", " ", "x3"}], "+", 
+     RowBox[{"ww", " ", "x4"}]}], ")"}], "2"]}]], "Output",
+ CellChangeTimes->{{3.6742360482483907`*^9, 3.6742360777325797`*^9}, 
+   3.674236111288395*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"repl", "=", 
+  RowBox[{"Solve", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"DD1", "\[Equal]", "0"}], ",", 
+      RowBox[{"DD2", "==", "0"}], ",", 
+      RowBox[{"DD3", "==", "0"}], ",", 
+      RowBox[{"DD4", "==", "0"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x1", ",", "x2", ",", "x3", ",", "mu2"}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.674236136966159*^9, 3.674236206667406*^9}}]
+}, Open  ]],
+
+Cell["solve N (q_cut) = Delta_4 on the solutions of the cut", "Subchapter",
+ CellChangeTimes->{{3.6742362622193623`*^9, 3.674236291984353*^9}}]
+},
+WindowSize->{898, 990},
+WindowMargins->{{Automatic, 275}, {Automatic, 81}},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (September 9, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 127, 1, 67, "Subchapter"],
+Cell[CellGroupData[{
+Cell[732, 27, 266, 7, 31, "Input"],
+Cell[1001, 36, 212, 6, 31, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1262, 48, 133, 1, 67, "Subchapter"],
+Cell[CellGroupData[{
+Cell[1420, 53, 361, 10, 31, "Input"],
+Cell[1784, 65, 254, 8, 31, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2087, 79, 127, 1, 67, "Subchapter"],
+Cell[2217, 82, 783, 27, 92, "Input"],
+Cell[CellGroupData[{
+Cell[3025, 113, 95, 1, 31, "Input"],
+Cell[3123, 116, 371, 11, 31, "Output"]
+}, Open  ]],
+Cell[3509, 130, 451, 13, 31, "Input"]
+}, Open  ]],
+Cell[3975, 146, 143, 1, 67, "Subchapter"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
