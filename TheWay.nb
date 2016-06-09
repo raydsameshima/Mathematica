@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      4998,        185]
-NotebookOptionsPosition[      4122,        149]
-NotebookOutlinePosition[      4469,        164]
-CellTagsIndexPosition[      4426,        161]
+NotebookDataLength[      6054,        219]
+NotebookOptionsPosition[      5064,        179]
+NotebookOutlinePosition[      5411,        194]
+CellTagsIndexPosition[      5368,        191]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -28,11 +28,12 @@ Cell[CellGroupData[{
 Cell[BoxData[
  RowBox[{"q", "=", 
   RowBox[{
-   RowBox[{"x1", " ", "p1"}], "+", 
-   RowBox[{"x2", " ", "p2"}], "+", 
-   RowBox[{"x3", " ", "p3"}], "+", 
-   RowBox[{"x4", " ", "ww"}]}]}]], "Input",
- CellChangeTimes->{{3.6742357411916227`*^9, 3.6742357835146933`*^9}}],
+   RowBox[{"x1", " ", "e1"}], "+", 
+   RowBox[{"x2", " ", "e2"}], "+", 
+   RowBox[{"x3", " ", "e3"}], "+", 
+   RowBox[{"x4", " ", "e4"}]}]}]], "Input",
+ CellChangeTimes->{{3.6742357411916227`*^9, 3.6742357835146933`*^9}, {
+  3.674316723164818*^9, 3.674316729966461*^9}}],
 
 Cell[BoxData[
  RowBox[{
@@ -111,8 +112,10 @@ Cell[BoxData[{
 
 Cell[CellGroupData[{
 
-Cell[BoxData["DD1"], "Input",
- CellChangeTimes->{{3.674236047405985*^9, 3.674236110711191*^9}}],
+Cell[BoxData[
+ RowBox[{" ", "DD1"}]], "Input",
+ CellChangeTimes->{{3.674236047405985*^9, 3.674236110711191*^9}, 
+   3.6743185789661803`*^9}],
 
 Cell[BoxData[
  RowBox[{
@@ -128,6 +131,8 @@ Cell[BoxData[
    3.674236111288395*^9}]
 }, Open  ]],
 
+Cell[CellGroupData[{
+
 Cell[BoxData[
  RowBox[{"repl", "=", 
   RowBox[{"Solve", "[", 
@@ -139,12 +144,7 @@ Cell[BoxData[
       RowBox[{"DD3", "==", "0"}], ",", 
       RowBox[{"DD4", "==", "0"}]}], "}"}], ",", 
     RowBox[{"{", 
-     RowBox[{"x1", ",", "x2", ",", "x3", ",", "mu2"}], "}"}]}], 
-   "]"}]}]], "Input",
- CellChangeTimes->{{3.674236136966159*^9, 3.674236206667406*^9}}]
-}, Open  ]],
-
-Cell["solve N (q_cut) = Delta_4 on the solutions of the cut", "Subchapter",
+     RowBox[{"x1", ",", "x2", ",", "x3", ",", "mu2"Cell["solve N (q_cut) = Delta_4 on the solutions of the cut", "Subchapter",
  CellChangeTimes->{{3.6742362622193623`*^9, 3.674236291984353*^9}}]
 },
 WindowSize->{898, 990},
