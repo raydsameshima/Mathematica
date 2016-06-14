@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     55378,       1453]
-NotebookOptionsPosition[     51733,       1332]
-NotebookOutlinePosition[     52111,       1348]
-CellTagsIndexPosition[     52068,       1345]
+NotebookDataLength[     63151,       1680]
+NotebookOptionsPosition[     58875,       1541]
+NotebookOutlinePosition[     59253,       1557]
+CellTagsIndexPosition[     59210,       1554]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -1328,6 +1328,215 @@ Cell[BoxData[
    3.674900449994993*^9, {3.6749063891477833`*^9, 3.6749064146851473`*^9}, {
    3.6749089721385603`*^9, 3.6749090395621924`*^9}, {3.6749094087853594`*^9, 
    3.674909421561841*^9}, {3.674909495334714*^9, 3.67490952594211*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Triple", " ", "pole", " ", "cuts"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"L", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Dim", " ", "=", " ", 
+     RowBox[{"4", " ", "-", 
+      RowBox[{"2", " ", "\[Epsilon]"}]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"n", "=", "3"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ExternalMomentaBasis", "=", 
+     RowBox[{"{", 
+      RowBox[{"p1", ",", "p2"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Massless", " ", "case"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Kinematics", "=", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"p1", "^", "2"}], "\[Rule]", "0"}], ",", 
+       RowBox[{
+        RowBox[{"p2", "^", "2"}], "\[Rule]", "0"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"p1", " ", "p2"}], "\[Rule]", 
+        RowBox[{"s", "/", "2"}]}]}], "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"\[Omega]1", "^", "2"}], "\[Rule]", 
+        RowBox[{
+         RowBox[{"-", "t"}], 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"s", "+", "t"}], ")"}], "/", "s"}]}]}], " ", "*)"}], " ", 
+      "\[IndentingNewLine]", "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Props", " ", "=", " ", 
+     RowBox[{"{", 
+      RowBox[{"l1", ",", " ", 
+       RowBox[{"l1", "+", "p1"}], ",", " ", 
+       RowBox[{"l1", "-", "p2"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"RenormalizationCondition", "=", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", "1", "}"}], ",", "4"}], "}"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"GenerateBasis", "[", "1", "]"}], "\[IndentingNewLine]", 
+   RowBox[{"Delta4", " ", "=", "Integrand"}]}]}]], "Input",
+ CellChangeTimes->{{3.6749103129671555`*^9, 3.674910415288211*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Physical spacetime basis is \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"p1", ",", "p2", ",", "\[Omega]1", ",", "\[Omega]2"}], "}"}]}],
+  SequenceForm[
+  "Physical spacetime basis is ", {$CellContext`p1, $CellContext`p2, \
+$CellContext`\[Omega]1, $CellContext`\[Omega]2}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6749104169106216`*^9}],
+
+Cell[BoxData["\<\"Extra dimension is turned on.\"\>"], "Print",
+ CellChangeTimes->{3.6749104169574223`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of irreducible scalar products: \"\>", 
+   "\[InvisibleSpace]", "3"}],
+  SequenceForm["Number of irreducible scalar products: ", 3],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6749104171446233`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Irreducible Scalar Products:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"x14", ",", "x13", ",", "\[Mu]11"}], "}"}]}],
+  SequenceForm[
+  "Irreducible Scalar Products:", {$CellContext`x14, $CellContext`x13, \
+$CellContext`\[Mu]11}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6749104171446233`*^9}],
+
+Cell[BoxData["\<\"Cut equations for ISP are listed in the variable \
+'CutEqnISP'\"\>"], "Print",
+ CellChangeTimes->{3.6749104171446233`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Possible renormalizable terms: \"\>", "\[InvisibleSpace]", 
+   "22"}],
+  SequenceForm["Possible renormalizable terms: ", 22],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6749104172382236`*^9}],
+
+Cell[BoxData["\<\"\"\>"], "Print",
+ CellChangeTimes->{3.6749104172382236`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"The basis contains \"\>", "\[InvisibleSpace]", "15", 
+   "\[InvisibleSpace]", "\<\" terms, which are listed in the variable 'Basis'\
+\"\>"}],
+  SequenceForm[
+  "The basis contains ", 15, 
+   " terms, which are listed in the variable 'Basis'"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6749104172382236`*^9}],
+
+Cell[BoxData["\<\"The explicit form of the integrand is listed in the \
+variable 'Integrand'\"\>"], "Print",
+ CellChangeTimes->{3.6749104172382236`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of spurious terms: \"\>", "\[InvisibleSpace]", "9", 
+   "\[InvisibleSpace]", "\<\", listed in the variable 'SpuriousBasis'\"\>"}],
+  SequenceForm[
+  "Number of spurious terms: ", 9, ", listed in the variable 'SpuriousBasis'"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6749104172382236`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Number of non-spurious terms: \"\>", "\[InvisibleSpace]", "6", 
+   "\[InvisibleSpace]", "\<\", listed in the variable 'NSpuriousBasis'\"\>"}],
+  SequenceForm[
+  "Number of non-spurious terms: ", 6, 
+   ", listed in the variable 'NSpuriousBasis'"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6749104172382236`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Time used: \"\>", "\[InvisibleSpace]", "0.2810000000000006`", 
+   "\[InvisibleSpace]", "\<\" seconds\"\>"}],
+  SequenceForm["Time used: ", 0.2810000000000006, " seconds"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6749104172382236`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cc", "[", 
+   RowBox[{"0", ",", "0", ",", "0"}], "]"}], "+", 
+  RowBox[{"\[Mu]11", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "0", ",", "1"}], "]"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["\[Mu]11", "2"], " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "0", ",", "2"}], "]"}]}], "+", 
+  RowBox[{"x13", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "1", ",", "0"}], "]"}]}], "+", 
+  RowBox[{"x13", " ", "\[Mu]11", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "1", ",", "1"}], "]"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["x13", "2"], " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "2", ",", "0"}], "]"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["x13", "2"], " ", "\[Mu]11", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "2", ",", "1"}], "]"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["x13", "3"], " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "3", ",", "0"}], "]"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["x13", "4"], " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"0", ",", "4", ",", "0"}], "]"}]}], "+", 
+  RowBox[{"x14", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"1", ",", "0", ",", "0"}], "]"}]}], "+", 
+  RowBox[{"x14", " ", "\[Mu]11", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"1", ",", "0", ",", "1"}], "]"}]}], "+", 
+  RowBox[{"x13", " ", "x14", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"1", ",", "1", ",", "0"}], "]"}]}], "+", 
+  RowBox[{"x13", " ", "x14", " ", "\[Mu]11", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"1", ",", "1", ",", "1"}], "]"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["x13", "2"], " ", "x14", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"1", ",", "2", ",", "0"}], "]"}]}], "+", 
+  RowBox[{
+   SuperscriptBox["x13", "3"], " ", "x14", " ", 
+   RowBox[{"cc", "[", 
+    RowBox[{"1", ",", "3", ",", "0"}], "]"}]}]}]], "Output",
+ CellChangeTimes->{3.6749104172538238`*^9}]
 }, Open  ]]
 },
 WindowSize->{1313, 990},
@@ -1454,6 +1663,24 @@ Cell[CellGroupData[{
 Cell[48001, 1239, 1385, 33, 129, "Input"],
 Cell[49389, 1274, 961, 23, 54, "Output"],
 Cell[50353, 1299, 1364, 30, 96, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51754, 1334, 2041, 56, 359, "Input"],
+Cell[CellGroupData[{
+Cell[53820, 1394, 409, 9, 27, "Print"],
+Cell[54232, 1405, 107, 1, 27, "Print"],
+Cell[54342, 1408, 262, 6, 27, "Print"],
+Cell[54607, 1416, 367, 9, 27, "Print"],
+Cell[54977, 1427, 140, 2, 27, "Print"],
+Cell[55120, 1431, 248, 6, 27, "Print"],
+Cell[55371, 1439, 78, 1, 27, "Print"],
+Cell[55452, 1442, 366, 9, 27, "Print"],
+Cell[55821, 1453, 152, 2, 27, "Print"],
+Cell[55976, 1457, 356, 7, 27, "Print"],
+Cell[56335, 1466, 370, 8, 27, "Print"],
+Cell[56708, 1476, 294, 6, 27, "Print"]
+}, Open  ]],
+Cell[57017, 1485, 1842, 53, 87, "Output"]
 }, Open  ]]
 }
 ]
